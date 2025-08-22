@@ -2,7 +2,7 @@ name: Daily Commit Bot
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # Runs every day at 00:00 UTC
+    - cron: "17 7 * * *"   # Runs every day at 00:00 UTC
   workflow_dispatch:       # Allows manual trigger too
 
 jobs:
