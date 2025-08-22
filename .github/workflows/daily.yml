@@ -1,25 +1,30 @@
-name: Daily Commit Bot
+name: Daily Commit Quick Test
 
+# Triggers
 on:
   schedule:
-    - cron: "17 7 * * *"   # Runs every day at 00:00 UTC
-  workflow_dispatch:       # Allows manual trigger too
+    - cron: "17 7 * * *"   # Scheduled daily at 12:47 PM IST (07:17 UTC)
+  workflow_dispatch:       # Allows manual run
 
 jobs:
-  build:
+  daily-commit:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2️⃣ Update file (append text so commit always happens)
       - name: Update file
         run: |
-          echo "Last update: $(date)" > update.txt
+          echo "Quick test update at $(date)" >> update.txt
 
-      - name: Commit changes
+      # 3️⃣ Commit changes
+      - name: Commit & Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add update.txt
-          git commit -m "Daily update: $(date)" || echo "No changes to commit"
+          git commit -m "Daily quick test update: $(date)" || echo "No changes to commit"
           git push
